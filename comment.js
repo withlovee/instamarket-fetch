@@ -47,14 +47,11 @@ CommentController.fromNewPosts = function(){
 
   .catch(function(error) {
     console.log(error);
-    // mongoose.connection.close();
   })
 
   .fin(function(){
     console.log('next');
-    this.fromNewPosts();
-    // console.log('Done!');
-    // mongoose.connection.close();
+    this.fromNewPosts(); // Repeat it recursively
   }.bind(this));
 
 };
@@ -118,8 +115,6 @@ CommentController.saveComments = function(comments){
   var deferred = Q.defer();
 
   async.eachLimit(comments, 1, function(comment, callback) {
-
-    // console.log('save comment ' + comment.id);
 
     var aComment = new Comment(comment);
 
@@ -200,12 +195,11 @@ CommentController.fetchCommentsFromOnePost = function(postId){
     }, 1000 * 60 * 3);
 
     https.get({
-        host: 'api.instagram.com',
-        path: '/v1/media/'+ postId +'/comments?client_id=' + clientId,
-      }, function(res){
+      host: 'api.instagram.com',
+      path: '/v1/media/'+ postId +'/comments?client_id=' + clientId,
+    }, function(res){
 
-        var bodyChunks = [];
-        // console.log('requesting:' + postId);
+      var bodyChunks = [];
 
       res.on('data', function(chunk) {
 
@@ -279,5 +273,3 @@ CommentController.fetchCommentsFromOnePost = function(postId){
 module.exports = CommentController;
 
 CommentController.fromNewPosts()
-// console.log(https.globalAgent.maxSockets);
-// CommentController.listAdsAllowedPosts()
