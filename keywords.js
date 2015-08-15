@@ -28,6 +28,7 @@ Keywords.getKeywords = function(filename){
 
   var data = fs.readFileSync(filename,'utf8');
   data = data.split('\n\r');
+  // data.pop();
 
   return data;
 
