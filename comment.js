@@ -86,9 +86,7 @@ CommentController.findPosts = function(limit){
 CommentController.fetchComments = function(postIds){
 
   var deferred = Q.defer();
-  var calls = [];
-  var comments = [];
-  // console.log(postIds);
+
   console.log("Total Post ID: " + postIds.length);
 
   getCommentsFunction = postIds.map(function(postId){ 

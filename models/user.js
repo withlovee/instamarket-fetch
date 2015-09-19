@@ -3,7 +3,7 @@ module.exports = function(mongoose) {
   var User = mongoose.model('users', {
     username: String,
     profile_picture: String,
-    id: Number,
+    id: { type: Number, unique: true },
     full_name: String,
     following: [String],
     get_info: { type: Boolean, default: false },
@@ -11,7 +11,15 @@ module.exports = function(mongoose) {
     last_check: { type: Date, default: Date.now },
     last_fetched: { type: Date, default: Date.now },
     posts_fetched: Boolean,
-    influencer: { type: Boolean, default: false }
+    influencer: { type: Boolean, default: false },
+    /* profile */
+    counts: {
+      media: Number,
+      followed_by: Number,
+      follows: Number
+    },
+    bio: String,
+    website: String
   });
 
   return User;
