@@ -11,6 +11,8 @@ module.exports = function(mongoose) {
     last_check: { type: Date, default: Date.now },
     last_fetched: { type: Date, default: Date.now },
     posts_fetched: Boolean,
+    is_shop: Number,
+    is_shop_verified: Boolean,
     influencer: { type: Boolean, default: false },
     /* profile */
     counts: {
